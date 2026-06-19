@@ -6,12 +6,19 @@ require('dotenv').config();
 
 const { sequelize } = require('./models');
 
+const serviceRoutes = require('./routes/serviceRoutes');
+const simulationRoutes = require('./routes/simulationRoutes');
+
 const app = express();
 const PORT = process.env.PORT || 8000;
 
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+// Routes
+app.use('/api/services', serviceRoutes);
+app.use('/api/simulations', simulationRoutes);
 
 async function startServer() {
   try {
@@ -33,4 +40,3 @@ async function startServer() {
 startServer();
 
 module.exports = app;
- 
