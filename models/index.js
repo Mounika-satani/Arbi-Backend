@@ -28,8 +28,16 @@ if (process.env.DB_NAME && process.env.DB_USER && process.env.DB_PASSWORD && pro
       logging: false, // Optional: disable logging in production
     }
   );
-} else if (config.use_env_variable) {
-  sequelize = new Sequelize(process.env[config.use_env_variable], config);
+} else if (config.use_env_variable && process.env[config.use_env_variable]) {
+  sequelize = new Sequelize(process.env[config.use_env_variable], {
+    ...config,
+    dialectOptions: {
+      ssl: {
+        require: true,
+        rejectUnauthorized: false,
+      },
+    },
+  });
 } else {
   sequelize = new Sequelize(config.database, config.username, config.password, config);
 }
