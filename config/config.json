@@ -14,10 +14,7 @@
     "dialect": "postgres"
   },
   "production": {
-    "username": "postgres",
-    "password": "Aryan",
-    "database": "Chatbot",
-    "host": "13.61.177.105",
+    "use_env_variable": "DATABASE_URL",
     "dialect": "postgres"
   }
 }
